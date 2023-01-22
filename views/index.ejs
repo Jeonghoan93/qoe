@@ -1,22 +1,60 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+
     <link href="https://amp.azure.net/libs/amp/latest/skins/amp-default/azuremediaplayer.min.css" rel="stylesheet">
     <script src="https://amp.azure.net/libs/amp/latest/azuremediaplayer.min.js"></script>
 
     <script src="./plugin_stub.js"></script>
 </head>
-<body>
+<body> 
 
 <video id="vid1" class="azuremediaplayer amp-default-skin" width="640" height="400">
     <p class="amp-no-js">
-        To view this video please enable JavaScript, and consider upgrading to a web browser that supports HTML5 video
+    To view this video please enable JavaScript, and consider upgrading to a web browser that supports HTML5 video
     </p>
 </video>
+
+<div class="container">
+    <h1 style="text-align: center;">QoE Tester</h1>
+    <form action="" method="POST" class="my-4 form-inline">
+        <input required type="url" name="fullUrl" id="fullUrl" placeholder="https://type.video-url.com" class="form-control col mr-2">
+        <button type="submit" class="form-control btn btn-success my-2">Click to test QoE</button>
+    </form>
+    
+    <table class="table table-striped table-responsive">
+        <thead> <tr> <th>Full URL</th> </tr></thead>
+        <tbody><tr><td><a href="<%= telemetryData.fullUrl %>"><%= telemetryData.fullUrl %></a></td> </tr></tbody>
+
+        <thead> <tr><th>Video Frame Size</th></tr></thead>
+        <tbody><tr><td> <%= telemetryData.videoFrameSize.height %> x <%= telemetryData.videoFrameSize.width %> </td></tr></tbody>
+
+        <thead> <tr><th>Available Video Bitrates</th></tr></thead>
+        <tbody><tr><td> <%= telemetryData.availableVideoBitrates.join(", ") %> </td></tr></tbody>
+
+        <thead> <tr><th>Bitrate Switches</th></tr></thead>
+        <tbody><tr><td> <%= telemetryData.bitrateSwitches %> </td></tr></tbody>
+
+        <thead> <tr><th>Number Of Buffering Events</th></tr></thead>
+        <tbody><tr><td> <%= telemetryData.numberOfBuffering %> </td></tr></tbody>
+
+        <thead> <tr><th>Time Spent In Buffering State</th></tr></thead>
+        <tbody><tr><td> <%= telemetryData.timeSpentBuffering %> </td></tr></tbody>
+
+        <thead> <tr><th>Highest Bitrate Possible</th></tr></thead>
+        <tbody><tr><td> <%= telemetryData.highestBitratePossible %> </td></tr></tbody>
+
+        <thead> <tr><th>Too Many Bitrate Switches</th></tr></thead>
+        <tbody><tr><td> <%= telemetryData.tooManyBitrateSwitches %> </td></tr></tbody>
+
+        <thead> <tr><th>Too Many Buffering</th></tr></thead>
+        <tbody><tr><td> <%= telemetryData.tooManyBuffering %> </td></tr></tbody>
+    </table>
+</div>
 
 <script>
     var myPlayer = amp('vid1', {
@@ -30,7 +68,7 @@
                 plugins: {
                     /* load our telemetry plugin */
                     telemetry: {
-                        /* Options */
+                        "src": "./plugin_stub.js"
                     }
                 }
             }, function () {
