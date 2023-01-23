@@ -49,7 +49,7 @@ const axios = require('axios');
 
             // Send telemetry data to the server
             function sendTelemetryData() {
-                axios.post('http://localhost:3001/telemetry', telemetryData)
+                axios.post('http://localhost:5001/telemetry', telemetryData)
                 .then(function (response) {
                     console.log(response);
                 })

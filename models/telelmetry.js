@@ -1,26 +1,32 @@
 const mongoose = require('mongoose'); 
 
 const telemetrySchema = new mongoose.Schema({
-    frameSize: { 
-        type: Number, 
+    frameSize: {
+        type: String,
         required: true
     },
-    availableBitrates: { 
-        type: [Number], 
-        required: true 
+    availableBitrates: {
+        type: Array,
+        required: true
     },
-    bitrateSwitches: { 
-        type: Number, 
-        required: true 
-    },
-    numBuffering: { 
+    bitrateSwitches: {
         type: Number,
         required: true
     },
-    timeSpentBuffering: {
+    numberOfBuffering: {
         type: Number,
         required: true
-    }, 
+    },
+    bufferingDuration: {
+        type: Number,
+        required: true
+    },
+    timestamp: {
+        type: Date,
+        default: Date.now
+    }
 });
+    
+    
 
 module.exports = mongoose.model('Telemetry', telemetrySchema);
